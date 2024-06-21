@@ -8,7 +8,9 @@ use Inertia\Inertia;
 
 class ListingController extends Controller
 {
-    /**
+  
+
+      /**
      * Display a listing of the resource.
      */
     public function index()
