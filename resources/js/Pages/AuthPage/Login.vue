@@ -14,6 +14,10 @@
             </div>
             <div class="mt-4">
                 <button class="btn-primary w-full" type="submit">Login</button>
+
+                <div class="mt-2 text-center">
+                    <Link :href="route('user-account.create')" class="text-gray-500">Need an account? Click here</Link>
+                </div>
             </div>
         </div>
     </form>
@@ -22,7 +26,7 @@
 
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue';
-import { useForm } from '@inertiajs/vue3';
+import { useForm, Link } from '@inertiajs/vue3';
 
 const form = useForm({
     email: null,
