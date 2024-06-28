@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class ListingController extends Controller
+class ListingController extends \Illuminate\Routing\Controller
 {
   
+    use AuthorizesRequests;
+
+    public function __construct()
+    {   
+        $this->middleware('auth')->except(['index', 'show']);
+        $this->authorizeResource(Listing::class, 'listing');
+    }
 
       /**
      * Display a listing of the resource.
@@ -32,7 +41,8 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
-        Listing::create(
+       
+        $request->user()->listings()->create(
             $request->validate([
                 'beds' => 'required|integer|min:0|max:20',
                 'baths' => 'required|integer|min:0|max:20',
