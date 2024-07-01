@@ -24,7 +24,7 @@ class ListingController extends \Illuminate\Routing\Controller
      */
     public function index()
     {
-        $listing = Listing::all();
+        $listing = Listing::orderBy('created_at', 'desc')->paginate(10);
         return Inertia::render('Listing/Index', compact('listing'));
     }
 
