@@ -1,6 +1,6 @@
 <template>
     <MainLayout>
-        <Filters />
+        <Filters :filters="filters" />
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             <Listing v-for="list in listing.data" :key="list.id" :listing="list" />
         </div>
@@ -18,5 +18,6 @@ import Filters from '@/Pages/Listing/Index/Components/Filters.vue';
 
 defineProps({
     listing: Object,
+    filters: Object
 });
 </script>

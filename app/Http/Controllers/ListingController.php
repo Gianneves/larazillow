@@ -22,10 +22,13 @@ class ListingController extends \Illuminate\Routing\Controller
       /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $listing = Listing::orderBy('created_at', 'desc')->paginate(10);
-        return Inertia::render('Listing/Index', compact('listing'));
+        $filters = $request->only([
+            'priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'
+        ]);
+        $listing = Listing::orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+        return Inertia::render('Listing/Index', compact('listing', 'filters'));
     }
 
     /**
