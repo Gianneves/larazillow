@@ -32,7 +32,7 @@ class ListingController extends \Illuminate\Routing\Controller
             'Listing/Index',
             [
                 'filters' => $filters,
-                'listing' => Listing::orderByDesc('created_at')
+                'listing' => Listing::mostRecent()
                     ->when(
                         $filters['priceFrom'] ?? false,
                         fn ($query, $value) => $query->where('price', '>=', $value)
