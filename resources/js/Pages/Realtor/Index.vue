@@ -1,0 +1,3 @@
+<template>
+    Say Hello!
+</template>
