@@ -15,9 +15,6 @@
         <div>
             <Link :href="route('listing.edit', props.listing)">Edit</Link>
         </div>
-        <div>
-            <Link :href="route('listing.destroy', props.listing)" method="DELETE">Delete</Link>
-        </div>
     </Box>
 </template>
 

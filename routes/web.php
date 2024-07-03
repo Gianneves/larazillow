@@ -15,7 +15,7 @@ Route::get('/', [IndexController::class, 'index']);
 Route::get('/hello', [IndexController::class, 'show']);
 
 Route::resource('listing', ListingController::class)
-    ->only(['create', 'store', 'edit', 'update', 'destroy'])
+    ->only(['create', 'store', 'edit', 'update'])
     ->middleware('auth');
 
 Route::resource('listing', ListingController::class)
@@ -31,7 +31,8 @@ Route::prefix('realtor')
     ->name('realtor.')
     ->middleware('auth')
     ->group(function () {
-        Route::resource('listing', RealtorListingController::class);
+        Route::resource('listing', RealtorListingController::class)
+            ->only(['index', 'destroy']);
     });
 
 
