@@ -27,6 +27,8 @@ class ListingController extends \Illuminate\Routing\Controller
         $filters = $request->only([
             'priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'
         ]);
+
+
        
         return Inertia::render(
             'Listing/Index',

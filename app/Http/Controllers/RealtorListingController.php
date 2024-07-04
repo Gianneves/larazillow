@@ -14,15 +14,29 @@ class RealtorListingController extends \Illuminate\Routing\Controller
     use AuthorizesRequests;
 
     public function __construct()
-    {   
+    {
         $this->middleware('auth')->except(['index', 'show']);
         $this->authorizeResource(Listing::class, 'listing');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $listing = Auth::user()->listings;
-        return Inertia::render('Realtor/Index', compact('listing'));
+        $filters = [
+            'deleted' => $request->boolean('deleted')
+        ];
+
+
+
+        return Inertia::render(
+            'Realtor/Index',
+            [
+                'listing' => Auth::user()
+                    ->listings()
+                    ->mostRecent()
+                    ->filter($filters)
+                    ->get()
+            ]
+        );
     }
 
     public function destroy(Listing $listing)
