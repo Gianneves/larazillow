@@ -29,9 +29,10 @@ class RealtorListingController extends \Illuminate\Routing\Controller
         return Inertia::render(
             'Realtor/Index',
             [
+                'filters' => $filters,
                 'listing' => Auth::user()
                     ->listings()
-                    ->mostRecent()
+                   /*  ->mostRecent() */
                     ->filter($filters)
                     ->get()
             ]
