@@ -12,17 +12,24 @@ class Listing extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['beds', 'baths', 'area', 'city', 'code', 'street', 'street_nr', 'price' ];
+    protected $fillable = ['beds', 'baths', 'area', 'city', 'code', 'street', 'street_nr', 'price'];
 
-    public function owner(): BelongsTo {
+    protected $sortable = [
+        'price', 'created_at'
+    ];
+
+    public function owner(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'by_user_id');
     }
 
-    public function scopeMostRecent(Builder $query): Builder  {
+    public function scopeMostRecent(Builder $query): Builder
+    {
         return $query->orderByDesc('created_at');
     }
 
-    public function scopeFilter(Builder $query, array $filters): Builder {
+    public function scopeFilter(Builder $query, array $filters): Builder
+    {
         return $query->when(
             $filters['priceFrom'] ?? false,
             fn ($query, $value) => $query->where('price', '>=', $value)
@@ -44,6 +51,11 @@ class Listing extends Model
         )->when(
             $filters['deleted'] ?? false,
             fn ($query, $value) => $query->withTrashed()
+        )->when(
+            $filters['by'] ?? false,
+            fn ($query, $value) =>
+            !in_array($value, $this->sortable) ? $query :
+                $query->orderBy($value, $filters['order'] ?? 'desc')
         );
     }
 }
