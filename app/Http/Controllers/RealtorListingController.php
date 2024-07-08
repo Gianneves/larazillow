@@ -32,9 +32,9 @@ class RealtorListingController extends \Illuminate\Routing\Controller
                 'filters' => $filters,
                 'listing' => Auth::user()
                     ->listings()
-                   /*  ->mostRecent() */
                     ->filter($filters)
-                    ->get()
+                    ->paginate(5)
+                    ->withQueryString()
             ]
         );
     }
