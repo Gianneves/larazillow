@@ -5,22 +5,28 @@
             <RealtorFilters :filters="filters" />
         </section>
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-            <Box v-for="list in listing.data" :key="list.id">
+            <Box v-for="list in listing.data" :key="list.id" :class="{ 'border-dashed': list.deleted_at }">
                 <div class="flex flex-col md:flex-row gap-2 md:items-center justify-between">
-                    <div>
+                    <div :class="{ 'opacity-25': list.deleted_at }">
                         <div class="xl:flex items-center gap-2">
                             <PriceTag :price="list.price" class="text-2xl font-medium" />
-                            <ListingSpace  :listing="list" />
+                            <ListingSpace :listing="list" />
                         </div>
                     </div>
-                    <ListingAddress  :listing="list" class="text-gray-500" />
+                    <ListingAddress :listing="list" class="text-gray-500" />
                     <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-                        <a
-                            class="btn-outline text-xs font-medium"
-                            :href="route('listing.show', { listing: list.id})"
+                        <a class="btn-outline text-xs font-medium" :href="route('listing.show', { listing: list.id })"
                             target="_blank">Preview</a>
-                        <Link class="btn-outline text-xs font-medium" :href="route('realtor.listing.edit', { listing: list.id })">Edit</Link>
-                        <Link class="btn-outline text-xs font-medium" :href="route('realtor.listing.destroy', { listing: list.id })" as="button" method="delete">Delete</Link>
+                        <Link class="btn-outline text-xs font-medium"
+                            :href="route('realtor.listing.edit', { listing: list.id })">Edit</Link>
+                        <Link v-if="!list.deleted_at" class="btn-outline text-xs font-medium"
+                            :href="route('realtor.listing.destroy', { listing: list.id })" as="button" method="delete">
+                        Delete
+                        </Link>
+                        <Link v-else class="btn-outline text-xs font-medium"
+                            :href="route('realtor.listing.restore', { listing: list.id })" as="button" method="put">
+                        Restore
+                        </Link>
                     </div>
                 </div>
             </Box>
@@ -30,7 +36,7 @@
             <Pagination :links="listing.links" />
         </section>
     </MainLayout>
-    
+
 </template>
 
 <script setup>
