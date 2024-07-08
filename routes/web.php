@@ -14,12 +14,9 @@ use Inertia\Inertia;
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/hello', [IndexController::class, 'show']);
 
-Route::resource('listing', ListingController::class)
-    ->only(['create', 'store', 'edit', 'update'])
-    ->middleware('auth');
 
 Route::resource('listing', ListingController::class)
-    ->except(['create', 'store', 'edit', 'update', 'destroy']);
+    ->only(['index', 'show']);
 
 Route::get('login', [AuthController::class, 'create'])->name('login');
 Route::post('login', [AuthController::class, 'store'])->name('login.store');
@@ -32,7 +29,7 @@ Route::prefix('realtor')
     ->middleware('auth')
     ->group(function () {
         Route::resource('listing', RealtorListingController::class)
-            ->only(['index', 'destroy']);
+            ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     });
 
 

@@ -12,9 +12,7 @@
             <ListingAddress :listing="props.listing" class="text-gray-500" />
             </Link>
         </div>
-        <div>
-            <Link :href="route('listing.edit', props.listing)">Edit</Link>
-        </div>
+       
     </Box>
 </template>
 
