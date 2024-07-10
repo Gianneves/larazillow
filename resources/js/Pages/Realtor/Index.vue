@@ -14,20 +14,27 @@
                         </div>
                     </div>
                     <ListingAddress :listing="list" class="text-gray-500" />
-                    <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-                        <a class="btn-outline text-xs font-medium" :href="route('listing.show', { listing: list.id })"
-                            target="_blank">Preview</a>
-                        <Link class="btn-outline text-xs font-medium"
-                            :href="route('realtor.listing.edit', { listing: list.id })">Edit</Link>
-                        <Link v-if="!list.deleted_at" class="btn-outline text-xs font-medium"
-                            :href="route('realtor.listing.destroy', { listing: list.id })" as="button" method="delete">
-                        Delete
-                        </Link>
-                        <Link v-else class="btn-outline text-xs font-medium"
-                            :href="route('realtor.listing.restore', { listing: list.id })" as="button" method="put">
-                        Restore
-                        </Link>
-                    </div>
+                    <section>
+                        <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
+                            <a class="btn-outline text-xs font-medium"
+                                :href="route('listing.show', { listing: list.id })" target="_blank">Preview</a>
+                            <Link class="btn-outline text-xs font-medium"
+                                :href="route('realtor.listing.edit', { listing: list.id })">Edit</Link>
+                            <Link v-if="!list.deleted_at" class="btn-outline text-xs font-medium"
+                                :href="route('realtor.listing.destroy', { listing: list.id })" as="button"
+                                method="delete">
+                            Delete
+                            </Link>
+                            <Link v-else class="btn-outline text-xs font-medium"
+                                :href="route('realtor.listing.restore', { listing: list.id })" as="button" method="put">
+                            Restore
+                            </Link>
+                        </div>
+
+                        <div class="mt-2">
+                            <Link :href="route('realtor.listing.image.create', { listing: list.id })" class="block w-full btn-outline text-xs font-medium text-center">Images</Link>
+                        </div>
+                    </section>
                 </div>
             </Box>
         </section>
