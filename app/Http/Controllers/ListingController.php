@@ -28,7 +28,6 @@ class ListingController extends \Illuminate\Routing\Controller
             'priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'
         ]);
 
-
        
         return Inertia::render(
             'Listing/Index',
@@ -44,6 +43,7 @@ class ListingController extends \Illuminate\Routing\Controller
 
     public function show(Listing $listing)
     {
+        $listing->load(['images']);
         return Inertia::render('Listing/Show', compact('listing'));
     }
 
