@@ -11,6 +11,7 @@ class RealtorListingImageController extends Controller
 {
     public function create(Listing $listing)
     {
+        $listing->load(['images']);
         return Inertia::render('Realtor/ListingImage/Create', compact('listing'));
     }
 
