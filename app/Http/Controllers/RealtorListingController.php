@@ -33,6 +33,7 @@ class RealtorListingController extends \Illuminate\Routing\Controller
                 'listing' => Auth::user()
                     ->listings()
                     ->filter($filters)
+                    ->withCount('images')
                     ->paginate(5)
                     ->withQueryString()
             ]
