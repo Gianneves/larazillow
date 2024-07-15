@@ -34,6 +34,9 @@
                         <div class="mt-2">
                             <Link :href="route('realtor.listing.image.create', { listing: list.id })" class="block w-full btn-outline text-xs font-medium text-center">Images ({{ list.images_count }})</Link>
                         </div>
+                        <div class="mt-2">
+                            <Link :href="route('realtor.listing.show', { listing: list.id })" class="block w-full btn-outline text-xs font-medium text-center">Offers ({{ list.offers_count }})</Link>
+                        </div>
                     </section>
                 </div>
             </Box>

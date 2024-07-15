@@ -34,10 +34,17 @@ class RealtorListingController extends \Illuminate\Routing\Controller
                     ->listings()
                     ->filter($filters)
                     ->withCount('images')
+                    ->withCount('offers')
                     ->paginate(5)
                     ->withQueryString()
             ]
         );
+    }
+
+    public function show(Listing $listing)
+    {
+        $listing->load('offers');
+        return Inertia::render('Realtor/Show', compact('listing'));
     }
 
 
