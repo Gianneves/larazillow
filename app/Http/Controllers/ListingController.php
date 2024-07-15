@@ -44,7 +44,9 @@ class ListingController extends \Illuminate\Routing\Controller
     public function show(Listing $listing)
     {
         $listing->load(['images']);
-        return Inertia::render('Listing/Show', compact('listing'));
+        $offerMade = !Auth::user() ? null : $listing->offers()->byMe()->first();
+
+        return Inertia::render('Listing/Show', compact('listing', 'offerMade'));
     }
 
 }
