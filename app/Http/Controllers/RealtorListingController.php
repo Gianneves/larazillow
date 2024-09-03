@@ -43,7 +43,7 @@ class RealtorListingController extends \Illuminate\Routing\Controller
 
     public function show(Listing $listing)
     {
-        $listing->load('offers');
+        $listing->load('offers','offers.bidder');
         return Inertia::render('Realtor/Show', compact('listing'));
     }
 
