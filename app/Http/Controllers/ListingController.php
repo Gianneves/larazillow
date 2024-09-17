@@ -35,6 +35,7 @@ class ListingController extends \Illuminate\Routing\Controller
                 'filters' => $filters,
                 'listing' => Listing::mostRecent()
                     ->filter($filters)
+                    ->withoutSold()
                     ->paginate(10)
                     ->withQueryString()
             ]
