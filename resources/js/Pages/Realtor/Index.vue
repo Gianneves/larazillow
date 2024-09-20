@@ -8,6 +8,7 @@
             <Box v-for="list in listing.data" :key="list.id" :class="{ 'border-dashed': list.deleted_at }">
                 <div class="flex flex-col md:flex-row gap-2 md:items-center justify-between">
                     <div :class="{ 'opacity-25': list.deleted_at }">
+                        <div v-if="list.sold_at !== null" class="text-xs font-bold uppercase border border-dashed p-1 border-green-300 text-green-500 dark:border-green-600 dark:text-green-600 inline-block rounded-md mb-2">sold</div>
                         <div class="xl:flex items-center gap-2">
                             <PriceTag :price="list.price" class="text-2xl font-medium" />
                             <ListingSpace :listing="list" />
